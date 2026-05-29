@@ -36,12 +36,12 @@ jobs:
         run: flutter build apk --release
 
       - name: Rename APK
-        run: mv build/app/outputs/flutter-apk/app-release.apk build/app/outputs/flutter-apk/ngo-scout.apk
+        run: mv build/app/outputs/flutter-apk/app-release.apk build/app/outputs/flutter-apk/volun-link.apk
 
       - name: Create Release
         uses: ncipollo/release-action@v1
         with:
-          artifacts: "build/app/outputs/flutter-apk/ngo-scout.apk"
+          artifacts: "build/app/outputs/flutter-apk/volun-link.apk"
           tag: "latest"
           allowUpdates: true
           token: ${{ secrets.GITHUB_TOKEN }}

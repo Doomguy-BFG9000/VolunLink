@@ -2,7 +2,7 @@
 
 [![Flutter](https://img.shields.io/badge/Flutter-3.41.4-blue?logo=flutter&logoColor=white&style=for-the-badge)](https://flutter.dev)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)](https://opensource.org/licenses/MIT)
-[![Download APK](https://img.shields.io/badge/Download-Release%20APK-brightgreen?logo=android&logoColor=white&style=for-the-badge)](https://github.com/AmitKumarKoli67/NGO_SCOUT/releases/latest/download/ngo-scout.apk)
+[![Download APK](https://img.shields.io/badge/Download-Release%20APK-brightgreen?logo=android&logoColor=white&style=for-the-badge)](https://github.com/AmitKumarKoli67/VolunLink/releases/latest/download/volun-link.apk)
 
 **VolunLink** is a modern, responsive mobile application built with Flutter that connects passionate volunteers with non-profit organizations (NGOs) across India to create meaningful real-world impact.
 
@@ -58,8 +58,8 @@ Follow these steps to run the application locally on your machine.
 
 1. **Clone the repository:**
    ```bash
-   git clone https://github.com/AmitKumarKoli67/NGO_SCOUT.git
-   cd NGO_SCOUT
+   git clone https://github.com/AmitKumarKoli67/VolunLink.git
+   cd VolunLink
    ```
 
 2. **Install dependencies:**
