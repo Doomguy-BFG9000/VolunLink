@@ -69,30 +69,3 @@ class MyApp extends StatelessWidget {
   }
 }
 
-/// Interview Explanation:
-/// ----------------------
-/// "Main.dart is the entry point where:
-/// 
-/// 1. **Services Initialization**: Before app starts
-///    - StorageService for persistent data
-///    - CacheService for high-performance caching
-///    - Ensures services ready before UI loads
-/// 
-/// 2. **MultiProvider Setup**: All providers in one place
-///    - ThemeProvider for theme management
-///    - AuthProvider for authentication
-///    - NGOProvider for NGO data
-///    - Clean, organized structure
-/// 
-/// 3. **Portrait Lock**: Better mobile UX
-///    - Most apps work best in portrait
-///    - Prevents layout issues
-///    - Consistent experience
-/// 
-/// 4. **Error Handling**: Services fail gracefully
-///    - App still runs if services fail
-///    - Logs errors for debugging
-///    - Production-ready approach
-/// 
-/// This setup ensures everything is ready before
-/// the first screen renders!"
