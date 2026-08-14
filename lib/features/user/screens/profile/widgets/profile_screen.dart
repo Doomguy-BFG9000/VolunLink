@@ -1,4 +1,7 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:volun_link/app/theme/app_colors.dart';
 import 'package:volun_link/app/theme/app_text_styles.dart';
 import 'package:volun_link/core/constants/string_constants.dart';
@@ -8,8 +11,27 @@ import 'package:volun_link/features/shared/screens/role_selection_screen.dart';
 import 'package:provider/provider.dart';
 
 /// ProfileScreen - User profile and settings
-class ProfileScreen extends StatelessWidget {
+class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
+
+  @override
+  State<ProfileScreen> createState() => _ProfileScreenState();
+}
+
+class _ProfileScreenState extends State<ProfileScreen> {
+  File? profileImage;
+
+  final ImagePicker picker = ImagePicker();
+
+  Future<void> pickFromGallery() async {
+    final XFile? image = await picker.pickImage(source: ImageSource.gallery);
+
+    if (image != null) {
+      setState(() {
+        profileImage = File(image.path);
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -107,16 +129,39 @@ class ProfileScreen extends StatelessWidget {
       child: Column(
         children: [
           // Avatar
-          CircleAvatar(
-            radius: 50,
-            backgroundColor: Colors.white,
-            child: Text(
-              user?.getInitials() ?? 'U',
-              style: AppTextStyles.displaySmall(
-                context,
-                color: AppColors.primary,
+          Stack(
+            children: [
+              CircleAvatar(
+                radius: 50,
+                backgroundColor: Colors.white70,
+                backgroundImage:
+                    profileImage != null ? FileImage(profileImage!) : null,
+                child:
+                    profileImage == null
+                        ? Text(
+                          user?.getInitials() ?? 'U',
+                          style: AppTextStyles.displaySmall(
+                            context,
+                            color: AppColors.primary,
+                          ),
+                        )
+                        : null,
               ),
-            ),
+              Positioned(
+                bottom: 0,
+                right: 0,
+                child: Container(
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: Colors.white,
+                  ),
+                  child: IconButton(
+                    onPressed: pickFromGallery,
+                    icon: Icon(Icons.camera_alt),
+                  ),
+                ),
+              ),
+            ],
           ),
           const SizedBox(height: 16),
           // Name
@@ -129,6 +174,19 @@ class ProfileScreen extends StatelessWidget {
           Text(
             user?.email ?? '',
             style: AppTextStyles.bodyMedium(context, color: Colors.white70),
+          ),
+          Align(
+            alignment: Alignment.topRight,
+            child: Container(
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                color: Colors.white,
+              ),
+              child: IconButton(
+                onPressed: pickFromGallery,
+                icon: Icon(Icons.camera_alt),
+              ),
+            ),
           ),
         ],
       ),
