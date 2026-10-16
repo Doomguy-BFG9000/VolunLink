@@ -2,6 +2,7 @@
 
 [![Flutter](https://img.shields.io/badge/Flutter-3.41.4-blue?logo=flutter&logoColor=white&style=for-the-badge)](https://flutter.dev)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)](https://opensource.org/licenses/MIT)
+[![Good First Issues](https://img.shields.io/github/issues/AmitKumarKoli67/VolunLink/good%20first%20issue?color=7057ff&label=Good%20First%20Issues&style=for-the-badge)](https://github.com/AmitKumarKoli67/VolunLink/issues?q=is%3Aissue+is%3Aopen+label%3A%22good+first+issue%22)
 [![Download APK](https://img.shields.io/badge/Download-Release%20APK-brightgreen?logo=android&logoColor=white&style=for-the-badge)](https://github.com/AmitKumarKoli67/VolunLink/releases/latest/download/volun-link.apk)
 
 **VolunLink** is a modern, responsive mobile application built with Flutter that connects passionate volunteers with non-profit organizations (NGOs) across India to create meaningful real-world impact.
@@ -93,6 +94,15 @@ Follow these steps to run the application locally on your machine.
 - **Q3 2026:** Verify volunteer hours using geolocation check-in/out.
 - **Q4 2026:** Launch NGO crowdfunding and direct item donation requests.
 - **Q1 2027:** Implement volunteer certificate generation and LinkedIn sharing.
+
+---
+
+## 🤝 Contributing
+
+Contributions are what make the open-source community such an amazing place to learn, inspire, and create! We appreciate all contributions, whether it's fixing bugs, improving docs, or proposing new features.
+
+- Check out our [Contributing Guidelines](CONTRIBUTING.md) for full instructions on setup, code formatting, and PR submission.
+- Looking for something to work on? Browse our [Good First Issues](https://github.com/AmitKumarKoli67/VolunLink/issues?q=is%3Aissue+is%3Aopen+label%3A%22good+first+issue%22) to get started quickly.
 
 ---
 
