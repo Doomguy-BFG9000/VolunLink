@@ -550,11 +550,11 @@ class _NGODetailScreenState extends State<NGODetailScreen>
 
   /// Open the platform share sheet with the NGO's available details.
   Future<void> _shareNgo() async {
-    final renderObject =
-        _shareButtonKey.currentContext?.findRenderObject();
-    final shareOrigin = renderObject is RenderBox
-        ? renderObject.localToGlobal(Offset.zero) & renderObject.size
-        : null;
+    final renderObject = _shareButtonKey.currentContext?.findRenderObject();
+    final shareOrigin =
+        renderObject is RenderBox
+            ? renderObject.localToGlobal(Offset.zero) & renderObject.size
+            : null;
 
     await SharePlus.instance.share(
       ShareParams(
