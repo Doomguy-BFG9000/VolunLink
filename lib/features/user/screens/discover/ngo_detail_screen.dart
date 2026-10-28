@@ -2,11 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:volun_link/app/theme/app_colors.dart';
 import 'package:volun_link/app/theme/app_text_styles.dart';
 import 'package:provider/provider.dart';
+import 'package:share_plus/share_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../../../../core/constants/string_constants.dart';
-import '../../../../core/widgets/custom_button.dart';
 import '../../../../data/models/ngo_model.dart';
 import '../../../../data/providers/ngo_provider.dart';
+import '../../utils/ngo_share_message.dart';
 
 /// NGODetailScreen - Complete NGO information
 class NGODetailScreen extends StatefulWidget {
@@ -20,6 +21,7 @@ class NGODetailScreen extends StatefulWidget {
 
 class _NGODetailScreenState extends State<NGODetailScreen>
     with SingleTickerProviderStateMixin {
+  final _shareButtonKey = GlobalKey();
   late TabController _tabController;
 
   @override
@@ -85,7 +87,7 @@ class _NGODetailScreenState extends State<NGODetailScreen>
                 AppColors.getCategoryColor(widget.ngo.category),
                 AppColors.getCategoryColor(
                   widget.ngo.category,
-                ).withOpacity(0.7),
+                ).withValues(alpha: 0.7),
               ],
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
@@ -95,7 +97,7 @@ class _NGODetailScreenState extends State<NGODetailScreen>
             child: Icon(
               Icons.favorite,
               size: 80,
-              color: Colors.white.withOpacity(0.3),
+              color: Colors.white.withValues(alpha: 0.3),
             ),
           ),
         ),
@@ -103,10 +105,9 @@ class _NGODetailScreenState extends State<NGODetailScreen>
       actions: [
         // Share button
         IconButton(
+          key: _shareButtonKey,
           icon: const Icon(Icons.share),
-          onPressed: () {
-            // TODO: Implement share
-          },
+          onPressed: _shareNgo,
         ),
         // Favorite button
         IconButton(
@@ -219,7 +220,7 @@ class _NGODetailScreenState extends State<NGODetailScreen>
               label: Text(widget.ngo.category),
               backgroundColor: AppColors.getCategoryColor(
                 widget.ngo.category,
-              ).withOpacity(0.2),
+              ).withValues(alpha: 0.2),
               labelStyle: AppTextStyles.labelMedium(
                 context,
                 color: AppColors.getCategoryColor(widget.ngo.category),
@@ -311,9 +312,9 @@ class _NGODetailScreenState extends State<NGODetailScreen>
     return Container(
       padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
-        color: color.withOpacity(0.1),
+        color: color.withValues(alpha: 0.1),
         borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: color.withOpacity(0.3)),
+        border: Border.all(color: color.withValues(alpha: 0.3)),
       ),
       child: Column(
         children: [
@@ -419,7 +420,7 @@ class _NGODetailScreenState extends State<NGODetailScreen>
           Container(
             padding: const EdgeInsets.all(8),
             decoration: BoxDecoration(
-              color: AppColors.primary.withOpacity(0.1),
+              color: AppColors.primary.withValues(alpha: 0.1),
               borderRadius: BorderRadius.circular(8),
             ),
             child: Icon(icon, color: AppColors.primary, size: 20),
@@ -470,15 +471,13 @@ class _NGODetailScreenState extends State<NGODetailScreen>
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          if (widget.ngo.email != null) ...[
-            _buildContactItem(
-              'Email',
-              widget.ngo.email!,
-              Icons.email,
-              () => _sendEmail(widget.ngo.email!),
-            ),
-            const SizedBox(height: 12),
-          ],
+          _buildContactItem(
+            'Email',
+            widget.ngo.email,
+            Icons.email,
+            () => _sendEmail(widget.ngo.email),
+          ),
+          const SizedBox(height: 12),
           if (widget.ngo.phoneNumber != null) ...[
             _buildContactItem(
               'Phone',
@@ -546,6 +545,22 @@ class _NGODetailScreenState extends State<NGODetailScreen>
               ),
             ],
           ),
+    );
+  }
+
+  /// Open the platform share sheet with the NGO's available details.
+  Future<void> _shareNgo() async {
+    final renderObject =
+        _shareButtonKey.currentContext?.findRenderObject();
+    final shareOrigin = renderObject is RenderBox
+        ? renderObject.localToGlobal(Offset.zero) & renderObject.size
+        : null;
+
+    await SharePlus.instance.share(
+      ShareParams(
+        text: buildNgoShareMessage(widget.ngo),
+        sharePositionOrigin: shareOrigin,
+      ),
     );
   }
 
