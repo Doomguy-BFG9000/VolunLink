@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../../../../core/constants/string_constants.dart';
+import '../../../../core/widgets/custom_button.dart';
 import '../../../../data/models/ngo_model.dart';
 import '../../../../data/providers/ngo_provider.dart';
 import '../../utils/ngo_share_message.dart';
@@ -87,7 +88,7 @@ class _NGODetailScreenState extends State<NGODetailScreen>
                 AppColors.getCategoryColor(widget.ngo.category),
                 AppColors.getCategoryColor(
                   widget.ngo.category,
-                ).withValues(alpha: 0.7),
+                ).withOpacity(0.7),
               ],
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
@@ -97,7 +98,7 @@ class _NGODetailScreenState extends State<NGODetailScreen>
             child: Icon(
               Icons.favorite,
               size: 80,
-              color: Colors.white.withValues(alpha: 0.3),
+              color: Colors.white.withOpacity(0.3),
             ),
           ),
         ),
@@ -220,7 +221,7 @@ class _NGODetailScreenState extends State<NGODetailScreen>
               label: Text(widget.ngo.category),
               backgroundColor: AppColors.getCategoryColor(
                 widget.ngo.category,
-              ).withValues(alpha: 0.2),
+              ).withOpacity(0.2),
               labelStyle: AppTextStyles.labelMedium(
                 context,
                 color: AppColors.getCategoryColor(widget.ngo.category),
@@ -312,9 +313,9 @@ class _NGODetailScreenState extends State<NGODetailScreen>
     return Container(
       padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
-        color: color.withValues(alpha: 0.1),
+        color: color.withOpacity(0.1),
         borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: color.withValues(alpha: 0.3)),
+        border: Border.all(color: color.withOpacity(0.3)),
       ),
       child: Column(
         children: [
@@ -420,7 +421,7 @@ class _NGODetailScreenState extends State<NGODetailScreen>
           Container(
             padding: const EdgeInsets.all(8),
             decoration: BoxDecoration(
-              color: AppColors.primary.withValues(alpha: 0.1),
+              color: AppColors.primary.withOpacity(0.1),
               borderRadius: BorderRadius.circular(8),
             ),
             child: Icon(icon, color: AppColors.primary, size: 20),
@@ -471,13 +472,15 @@ class _NGODetailScreenState extends State<NGODetailScreen>
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          _buildContactItem(
-            'Email',
-            widget.ngo.email,
-            Icons.email,
-            () => _sendEmail(widget.ngo.email),
-          ),
-          const SizedBox(height: 12),
+          if (widget.ngo.email != null) ...[
+            _buildContactItem(
+              'Email',
+              widget.ngo.email!,
+              Icons.email,
+              () => _sendEmail(widget.ngo.email!),
+            ),
+            const SizedBox(height: 12),
+          ],
           if (widget.ngo.phoneNumber != null) ...[
             _buildContactItem(
               'Phone',
